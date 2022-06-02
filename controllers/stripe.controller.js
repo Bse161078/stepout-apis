@@ -15,14 +15,14 @@ const createStripeUser = (async (req, res) => {
 
 
 const createAddCardPendingIntent = (async (req, res) => {
-    const intent = await stripeService.createAddCardPendingIntent(req.body.id);
+    const intent = await stripeService.createAddCardPendingIntent(req.body.stripe_id);
     res.status(httpStatus.OK).send({clientSecret: intent.client_secret});
 });
 
 
 const createSubscription = (async (req, res) => {
     try {
-        const subscription = await stripeService.createSubscription(req.body.stripe_id, req.body.paymentMethod, req.body.subscriptionName);
+        const subscription = await stripeService.createSubscription(req.body.user_id, req.body.paymentMethod, req.body.subscriptionName);
         res.status(httpStatus.OK).send(subscription);
     } catch (e) {
         res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e);
