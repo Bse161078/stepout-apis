@@ -10,6 +10,7 @@ app.use(express.urlencoded({ extended: false }));
 
 
 app.post(`/create-stripe-user`,stripeController.createStripeUser);
+app.post(`/add-card-intent`,stripeController.createAddCardPendingIntent);
 app.post(`/create-stripe-subscription`,stripeController.createSubscription);
 app.post(`/update-subscription-method`,stripeController.updateDefaultPaymentMethodSubscription);
 app.post(`/cancel-subscription`,stripeController.cancelSubscription);

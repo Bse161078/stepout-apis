@@ -22,16 +22,20 @@ const db = admin.firestore();
  * @param {email} stripeBody
  * @returns {StripeResponse}
  */
-const getUserById=async ()=>{
-    const user = await db.collection('SignupSubscriber').doc("15d7cbdb-40cb-4ee0-a998-52e0b2491a4e").get();
+const getUserById=async (id)=>{
+    const user = await db.collection('SignupSubscriber').doc(id).get();
     return user;
 }
 
+const createUser = async (email) => {
+    const customer = await stripe.customers.create({email});
+    return customer;
+}
 
 const createStripeUser = async (email) => {
-    const stripe = await stripeService.createStripeUser(email);
+    const stripe = await createUser(email);
     const id=uuidv4();
-    await db.collection("SignupSubscriber").doc(id).set({email,id,stripe_id:stripe.id,subscription_id:null,active:false});
+    await db.collection("SignupSubscriber").doc(id).set({email,id,stripe_id:stripe.id,subscription_id:null,status:"deleted"});
     return ({email,id,stripe_id:stripe.id})
 }
 
@@ -41,12 +45,10 @@ const createStripeUser = async (email) => {
  * @param {string} id
  * @returns {IntentObject}
  */
-const createAddCardPendingIntent = async (id) => {
-
-    const user = await userService.getUserById(id);
+const createAddCardPendingIntent = async (stripe_id) => {
 
     const setupIntent = await stripe.setupIntents.create({
-        customer: user.stripeId,
+        customer: stripe_id,
     });
     return setupIntent;
 };
