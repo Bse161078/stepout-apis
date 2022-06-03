@@ -4,9 +4,10 @@ var stripeController=require("./controllers/stripe.controller")
 
 var app = express();
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+var cors = require('cors');
+app.use(cors());
 
 
 app.post(`/create-stripe-user`,stripeController.createStripeUser);
