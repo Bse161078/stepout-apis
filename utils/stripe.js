@@ -1,5 +1,5 @@
 const moment=require('moment');
-const getDefaultPriceId="price_1KzbbIFJ50BG2GSlmuIoyZ2M";
+const getDefaultPriceId="price_1L5Yk4Jngle5KEdgE5WZB68V";
 
 const DEFAULT_SUBSCRIPTIONS=[{name:"StepoutSubscribtion",id:"price_1L5Yk4Jngle5KEdgE5WZB68V",price:"$15",credit:6,eventsPerMonth:"1"}];
 

@@ -17,8 +17,8 @@ app.post(`/update-subscription-method`,stripeController.updateDefaultPaymentMeth
 app.post(`/cancel-subscription`,stripeController.cancelSubscription);
 
 
-app.listen(process.env.PORT || 3000,()=>{
-  console.log("app is listening at ",3000)
+app.listen(process.env.PORT || 3002,()=>{
+  console.log("app is listening at ",3002)
 })
 
 

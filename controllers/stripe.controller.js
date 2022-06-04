@@ -13,12 +13,10 @@ const createStripeUser = (async (req, res) => {
     res.status(httpStatus.OK).send(stripe);
 });
 
-
 const createAddCardPendingIntent = (async (req, res) => {
     const intent = await stripeService.createAddCardPendingIntent(req.body.stripe_id);
     res.status(httpStatus.OK).send({clientSecret: intent.client_secret});
 });
-
 
 const createSubscription = (async (req, res) => {
     try {
