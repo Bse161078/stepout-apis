@@ -35,7 +35,7 @@ const createUser = async (email) => {
 const createStripeUser = async (email) => {
     const stripe = await createUser(email);
     const id=uuidv4();
-    await db.collection("SignupSubscriber").doc(id).set({email,id,stripe_id:stripe.id,subscription_id:null,status:"deleted"});
+    await db.collection("Subscriber").doc(id).set({email,id,stripe_id:stripe.id,subscription_id:null,status:"deleted"});
     return ({email,id,stripe_id:stripe.id})
 }
 
